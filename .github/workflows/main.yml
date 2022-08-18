@@ -1,0 +1,62 @@
+name: Builder Development
+
+on:
+  push:
+    branches:
+      - dev
+    tags:
+      - v*
+
+jobs:
+  cancel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+  deploy:
+    needs: cancel
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER_NAME }}
+          port: 22
+          script_stop: true
+          script: |
+            cd /home/hung/MabyClient
+            echo "Access folder"
+            git pull
+            echo "Pull code done"
+            docker-compose up -d --build
+            echo "Build"
+            docker system prune -a -f
+            echo "Prune image"
+      - name: On Failure
+        if: failure()
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_URL }}
+
+  notifification:
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_URL }}
+          title: "Build and Deploy"
+          description: "Test here: http://35.197.143.93:3000/"
