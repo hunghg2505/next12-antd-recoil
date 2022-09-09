@@ -10,6 +10,7 @@ const nextConfig = {
   // i18n
   i18n,
   swcMinify: true,
+
   // config env
   publicRuntimeConfig: {
     NODE_ENV: process.env.NODE_ENV,
