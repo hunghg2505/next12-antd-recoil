@@ -5,7 +5,7 @@ import TokenManagement from './TokenManagement';
 const REQ_TIMEOUT = 25 * 1000;
 export const isDev = ENV.NODE_ENV === 'development';
 
-export const PREFIX_API = isDev ? ENV.API_URL_DEV : ENV.API_URL_PRODUCTION;
+export const PREFIX_API = ENV.APP_API_URL;
 
 const request = extend({
   prefix: PREFIX_API,

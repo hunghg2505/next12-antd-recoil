@@ -2,10 +2,10 @@ import type { NextPage } from 'next';
 import { useTranslation } from 'next-i18next';
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import MainLayout from 'src/layout/MainLayout';
 
-import Home from 'src/components/Home';
 import { Select } from 'antd';
+import MainLayout from '@layout/MainLayout';
+import Home from '@components/Home';
 
 const HomePage: NextPage = () => {
   const { t } = useTranslation('home');
