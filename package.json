@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "[ -e .env ] && set -a && . ./.env; next dev",
+    "dev": "[ -e .env.development ] && set -a && . ./.env.development; next dev",
     "build": "next build",
     "start": "[ -e .env.production ] && set -a && . ./.env.production; next start",
     "lint": "next lint",
