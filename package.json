@@ -1,7 +1,7 @@
 {
-  "name": "@hunghg/nextjs-inti",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@hunghg/nextjs-initial",
+  "version": "0.1.3",
+  "main": ".",
   "scripts": {
     "dev": "[ -e .env.development ] && set -a && . ./.env.development; next dev",
     "build": "next build",
@@ -53,5 +53,21 @@
     "*.{ts,tsx}": [
       "npm run lint"
     ]
-  }
+  },
+  "description": "## Getting Started",
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/hunghg2505/nextjs-init.git"
+  },
+  "author": "Hung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hunghg2505/nextjs-init/issues"
+  },
+  "homepage": "https://github.com/hunghg2505/nextjs-init#readme",
+  "keywords": [
+    "Next",
+    "antd",
+    "recoil"
+  ]
 }
