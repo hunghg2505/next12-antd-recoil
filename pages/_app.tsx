@@ -4,19 +4,33 @@ import type { AppProps } from 'next/app';
 import { appWithTranslation } from 'next-i18next';
 import nextI18nConfig from '../next-i18next.config';
 import { RecoilRoot } from 'recoil';
-import { memoize } from 'src/utils/common';
-import ErrorBoundary from 'src/components/ErrorBoundary';
+import { memoize } from '@utils/common';
+import AppLayout from '@layout/AppLayout';
+import ErrorBoundary from '@components/ErrorBoundary';
+import type { ReactElement, ReactNode } from 'react';
+import type { NextPage } from 'next';
 import Head from 'next/head';
 
-function MyApp({ Component, pageProps }: AppProps) {
+export type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ? Component.getLayout : (page: any) => page;
+
   return (
     <>
       <Head>
         <meta name='robots' content='index, follow' />
+        <meta name='googlebot' content={'index,follow'} />
         <meta charSet='utf-8' />
         <meta name='theme-color' content='#476055' />
-        <meta name='title' content='Nextjs Initial' />
-        <meta name='description' content='Nextjs Initial' />
+        <meta name='title' content='Maby Client' />
+        <meta name='description' content='Maby Client' />
         <link rel='shortcut icon' href='/static/favicon.ico' />
         <meta
           name='viewport'
@@ -26,7 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
       <ErrorBoundary>
         <RecoilRoot>
-          <Component {...pageProps} />
+          <AppLayout>{getLayout(<Component {...pageProps} />)}</AppLayout>
         </RecoilRoot>
       </ErrorBoundary>
     </>
