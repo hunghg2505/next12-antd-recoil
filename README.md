@@ -1,4 +1,4 @@
-# Nextjs + Recoil + Antd
+# Nextjs + Recoil + Ant Design
 
 ## Getting Started
 
@@ -6,24 +6,29 @@ First, run the development server:
 
 ```bash
 # Install package
-npm install
+npm install or yarn
 
 # Run
-npm run dev
+npm run dev or yarn dev
 ```
 
 ## Library Docs
 
+
 ```md
-1. Framework Reactjs: https://nextjs.org/
+1. Framework Nextjs: https://nextjs.org/
 
-2. Library UI: https://ant.design
+2. State management Reactjs: https://recoiljs.org/
 
-3. Library for request api: https://www.npmjs.com/package/umi-request
+3. Library UI: https://ant.design
 
-4. Library Multiple Language: https://www.npmjs.com/package/next-i18next
+4. Library for request api: https://www.npmjs.com/package/umi-request
 
-5. Library Hooks popular: https://ahooks.js.org/
+5. Library Multiple Language: https://www.npmjs.com/package/next-i18next
 
-6. Processing CSS: https://sass-lang.com/guide
+6. Library Hooks popular: https://ahooks.js.org/
+
+7. Library dayjs: https://day.js.org/
+
+8. Processing CSS: https://sass-lang.com/guide
 ```

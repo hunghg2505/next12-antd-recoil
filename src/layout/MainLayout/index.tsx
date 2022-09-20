@@ -1,20 +1,12 @@
-import Head from 'next/head';
-
 import dynamic from 'next/dynamic';
-const MainHeader = dynamic(() => import('../components/MainHeader'), {
-  ssr: false,
-});
 
-const Footer = dynamic(() => import('../components/Footer'), {
-  ssr: false,
-});
+const MainHeader = dynamic(() => import('../components/MainHeader'));
 
-const MainLayout = ({ children, title = 'Title' }: any) => {
+const Footer = dynamic(() => import('../components/Footer'));
+
+const MainLayout = ({ children }: any) => {
   return (
     <>
-      <Head>
-        <title>{title}</title>
-      </Head>
       <MainHeader />
       <main>{children}</main>
       <Footer />
