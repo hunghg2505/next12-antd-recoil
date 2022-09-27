@@ -24,6 +24,11 @@ const nextConfig = {
   httpAgentOptions: {
     keepAlive: false,
   },
+  compiler: {
+    removeConsole: {
+      exclude: ['error'],
+    },
+  },
   headers: async function headers() {
     if (process.env.NODE_ENV === 'development') return [];
     return [
