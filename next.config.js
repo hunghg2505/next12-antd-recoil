@@ -5,6 +5,15 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
+const compiler =
+  process.env.NODE_ENV === 'development'
+    ? {}
+    : {
+        removeConsole: {
+          exclude: ['error'],
+        },
+      };
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // i18n
@@ -24,11 +33,7 @@ const nextConfig = {
   httpAgentOptions: {
     keepAlive: false,
   },
-  compiler: {
-    removeConsole: {
-      exclude: ['error'],
-    },
-  },
+  compiler,
   headers: async function headers() {
     if (process.env.NODE_ENV === 'development') return [];
     return [
