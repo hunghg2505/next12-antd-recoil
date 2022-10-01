@@ -1,6 +1,6 @@
 import { extend } from 'umi-request';
 import { ENV } from 'src/utils/env';
-import TokenManagement from './TokenManagement';
+import TokenManagement from './tokenManagement';
 
 const REQ_TIMEOUT = 25 * 1000;
 export const isDev = ENV.NODE_ENV === 'development';
@@ -44,13 +44,14 @@ const injectBearer = (token: string, configs: any) => {
 
 const TokenManager = new TokenManagement({
   isTokenValid: () => {
-    const localInfo = window?.localStorage.getItem(ENV.LOCAL_STORAGE_KEY as string);
-    let localInfoObject;
+    // const localInfo = window?.localStorage.getItem(ENV.LOCAL_STORAGE_KEY as string);
+    // let localInfoObject;
 
-    if (localInfo) {
-      localInfoObject = JSON.parse(localInfo);
-    }
-    return !!localInfoObject?.token;
+    // if (localInfo) {
+    //   localInfoObject = JSON.parse(localInfo);
+    // }
+    // return !!localInfoObject?.token;
+    return true;
   },
   getAccessToken: () => {
     const localInfo = window?.localStorage.getItem(ENV.LOCAL_STORAGE_KEY as string);
@@ -100,9 +101,4 @@ const privateRequest = async (request: any, suffixUrl: string, configs?: any) =>
   return request(suffixUrl, injectBearer(token, configs));
 };
 
-const API_PATH = {
-  // Auth
-  AUTH_LOGIN: '/auth/login',
-};
-
-export { request, privateRequest, API_PATH };
+export { request, privateRequest };
