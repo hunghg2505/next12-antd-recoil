@@ -32,10 +32,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         <meta name='title' content='Maby Client' />
         <meta name='description' content='Maby Client' />
         <link rel='shortcut icon' href='/static/favicon.ico' />
-        <meta
-          name='viewport'
-          content='width=device-width,initial-scale=1,maximum-scale=2,shrink-to-fit=no'
-        />
+        <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1' />
       </Head>
 
       <ErrorBoundary>
