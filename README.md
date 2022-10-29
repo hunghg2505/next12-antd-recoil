@@ -8,12 +8,14 @@ First, run the development server:
 # Install package
 npm install or yarn
 
+# install husky
+npm run prepare
+
 # Run
 npm run dev or yarn dev
 ```
 
 ## Library Docs
-
 
 ```md
 1. Framework Nextjs: https://nextjs.org/
