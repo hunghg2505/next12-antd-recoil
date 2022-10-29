@@ -27,7 +27,7 @@ const nextConfig = {
   },
   images: {
     minimumCacheTTL: 60,
-    formats: ['image/avif', 'image/webp'],
+    formats: ['image/webp'],
     domains: [],
   },
   httpAgentOptions: {
@@ -38,7 +38,7 @@ const nextConfig = {
     if (process.env.NODE_ENV === 'development') return [];
     return [
       {
-        source: '/:all*(svg|jpg|png|webp|avif)',
+        source: '/:all*(svg|jpg|jpeg|png|webp|avif|otf)',
         locale: false,
         headers: [
           {
