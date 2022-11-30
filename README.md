@@ -14,11 +14,10 @@ npm run dev or yarn dev
 
 ## Library Docs
 
-
 ```md
 1. Framework Nextjs: https://nextjs.org/
 
-2. State management Reactjs: https://recoiljs.org/
+2. State management Reactjs: https://recoiljs.org/ Or https://jotai.org/
 
 3. Library UI: https://ant.design
 
