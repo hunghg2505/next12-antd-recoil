@@ -1,6 +1,6 @@
 import { extend } from 'umi-request';
 import { ENV } from 'src/utils/env';
-import TokenManagement from './TokenManagement';
+import TokenManagement from './tokenManagement';
 
 const REQ_TIMEOUT = 25 * 1000;
 export const isDev = ENV.NODE_ENV === 'development';
@@ -24,7 +24,16 @@ const injectBearer = (token: string, configs: any) => {
     };
   }
 
-  if (configs.headers) {
+  if (configs?.headers?.Authorization) {
+    return {
+      ...configs,
+      headers: {
+        ...configs.headers,
+      },
+    };
+  }
+
+  if (configs?.headers) {
     return {
       ...configs,
       headers: {
@@ -44,13 +53,24 @@ const injectBearer = (token: string, configs: any) => {
 
 const TokenManager = new TokenManagement({
   isTokenValid: () => {
-    const localInfo = window?.localStorage.getItem(ENV.LOCAL_STORAGE_KEY as string);
-    let localInfoObject;
+    // try {
+    //   const token = getAccessToken();
 
-    if (localInfo) {
-      localInfoObject = JSON.parse(localInfo);
-    }
-    return !!localInfoObject?.token;
+    //   const decoded = parseJwt(token);
+    //   const { exp } = decoded;
+
+    //   const currentTime = Date.now() / 1000;
+
+    //   if (exp - 5 > currentTime) {
+    //     return true;
+    //   }
+
+    //   return false;
+    // } catch (error) {
+    //   return false;
+    // }
+
+    return true;
   },
   getAccessToken: () => {
     const localInfo = window?.localStorage.getItem(ENV.LOCAL_STORAGE_KEY as string);
@@ -100,9 +120,53 @@ const privateRequest = async (request: any, suffixUrl: string, configs?: any) =>
   return request(suffixUrl, injectBearer(token, configs));
 };
 
-const API_PATH = {
-  // Auth
-  AUTH_LOGIN: '/auth/login',
+// dùng cái này khi gọi nhiều api ở phía server => đảm bảo có token mới nhất cho các request ở sau, tránh bị call reuqest đồng thời
+export const checkTokenExpiredOnServer = async (ctx: any) => {
+  try {
+    // const token = getAccessToken(ctx?.res, ctx?.req);
+    // const salonRefreshToken = getRefreshToken(ctx?.res, ctx?.req);
+
+    // const decoded = parseJwt(token);
+    // const { exp } = decoded;
+
+    // const currentTime = Date.now() / 1000;
+
+    // if (exp - 5 > currentTime) return null;
+
+    // const res: any = await privateRequest(fetch, `${PREFIX_API}/auth/refresh-token`, {
+    //   method: 'POST',
+    //   headers: {
+    //     Accept: 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({ refresh_token: salonRefreshToken }),
+    // }).then((r) => r.json());
+
+    // if (res?.token && res?.refresh_token) {
+    //   const objToken = {
+    //     token: res?.token,
+    //     refreshToken: res?.refresh_token,
+    //     expiredTime: res?.expired_time || 0,
+    //   };
+
+    //   setAuthCookies(objToken, { res: ctx?.res, req: ctx?.req });
+
+    //   return res?.token;
+    // }
+    return null;
+  } catch (error) {
+    return null;
+  }
 };
 
-export { request, privateRequest, API_PATH };
+export const requestFromServer = async (ctx: any, suffixUrl: string) => {
+  // await checkTokenExpiredOnServer(ctx);
+  // const token = getAccessToken(ctx?.res, ctx?.req);
+  // const salonId = getSalonIdFromCookie(ctx?.req, ctx?.res);
+  // return privateRequest(fetch, `${PREFIX_API}${suffixUrl}`, {
+  //   token,
+  //   headers: { salonId },
+  // }).then((r) => r.json());
+};
+
+export { request, privateRequest };
